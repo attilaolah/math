@@ -1,0 +1,26 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+# gazelle:prefix github.com/attilaolah/math/poly
+gazelle(name = "gazelle")
+
+go_library(
+    name = "poly",
+    srcs = [
+        "int64_m.go",
+        "int64_p.go",
+        "int64_t.go",
+    ],
+    importpath = "github.com/attilaolah/math/poly",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "poly_test",
+    srcs = [
+        "int64_m_test.go",
+        "int64_p_test.go",
+        "int64_t_test.go",
+    ],
+    embed = [":poly"],
+)
