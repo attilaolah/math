@@ -1,5 +1,6 @@
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@com_github_atlassian_bazel_tools//golangcilint:deps.bzl", "golangcilint_dependencies")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 def install_dependencies():
     """Install Go dependencies.
@@ -15,3 +16,6 @@ def install_dependencies():
 
     # Register Gazelle dependencies.
     gazelle_dependencies()
+
+    # Register Go linter dependencies.
+    golangcilint_dependencies()

@@ -3,11 +3,13 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Version information.
 # This is here to make it easier to update this file.
 VERSIONS = {
+    "atlassian/bazel-tools": "a2138311856f55add11cd7009a5abc8d4fd6f163",
     "bazelbuild/bazel-gazelle": "v0.19.1",
     "bazelbuild/bazel-skylib": "1.0.2",
     "bazelbuild/rules_go": "v0.20.2",
 }
 SHA256_SUMS = {
+    "atlassian/bazel-tools": "9db3d3eededb398ae7d5a00b428d32b59577da0b3f4b4eb07daf710509008bfc",
     "bazelbuild/bazel-gazelle": "86c6d481b3f7aedc1d60c1c211c6f76da282ae197c3b3160f54bd3a8f847896f",
     "bazelbuild/bazel-skylib": "e5d90f0ec952883d56747b7604e2a15ee36e288bb556c3d0ed33e818a4d971f2",
     "bazelbuild/rules_go": "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
@@ -39,6 +41,14 @@ def register_repositories():
         name = "bazel_gazelle",
         repo = "bazelbuild/bazel-gazelle",
         url = "releases/download/{version}/bazel-gazelle-{version}.tar.gz",
+    )
+
+    # Go Linter.
+    _github_archive(
+        name = "com_github_atlassian_bazel_tools",
+        repo = "atlassian/bazel-tools",
+        url = "archive/{version}.zip",
+        strip_prefix = "bazel-tools-{version}",
     )
 
 def _github_archive(name, repo, url, strip_prefix = None):
