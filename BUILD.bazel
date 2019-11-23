@@ -7,7 +7,7 @@ gazelle(name = "gazelle")
 
 golangcilint(
     name = "golangci",
-    config = "//:.golangci.yaml",
+    config = "//:.golangci.yml",
     paths = [
         "./poly",
     ],
