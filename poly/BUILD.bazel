@@ -1,8 +1,4 @@
-load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
-
-# gazelle:prefix github.com/attilaolah/math/poly
-gazelle(name = "gazelle")
 
 go_library(
     name = "poly",
