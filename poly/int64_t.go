@@ -98,11 +98,12 @@ func (i Ind) String() string {
 	var s []string
 	const simple = "xyz"
 
-	if size := len(i); size == 0 {
+	switch size := len(i); {
+	case size == 0:
 		return "1"
-	} else if size <= len(simple) {
+	case size <= len(simple):
 		s = strings.Split(simple, "")[:size]
-	} else {
+	default:
 		for i := range i {
 			s = append(s, "x"+sub(int64(i)))
 		}
@@ -124,20 +125,15 @@ func (i Ind) String() string {
 	return ret
 }
 
-var (
-	sub10 = [11]rune{'₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉', '₋'}
-	sup10 = [11]rune{'⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹', '¯'}
-)
-
 func sub(i int64) string {
 	if i == 0 {
-		return string(sub10[0])
+		return "₀"
 	}
-	return smap(i, sub10)
+	return smap(i, [...]rune{'₀', '₁', '₂', '₃', '₄', '₅', '₆', '₇', '₈', '₉', '₋'})
 }
 
 func sup(i int64) string {
-	return smap(i, sup10)
+	return smap(i, [...]rune{'⁰', '¹', '²', '³', '⁴', '⁵', '⁶', '⁷', '⁸', '⁹', '¯'})
 }
 
 func smap(i int64, m [11]rune) string {

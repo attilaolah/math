@@ -106,10 +106,10 @@ func (m Int64M) String() string {
 		switch i {
 		case 0:
 			ret = append(ret, "⎡"+row+"⎤")
-		default:
-			ret = append(ret, "⎢"+row+"⎥")
 		case len(rows) - 1:
 			ret = append(ret, "⎣"+row+"⎦")
+		default:
+			ret = append(ret, "⎢"+row+"⎥")
 		}
 	}
 
