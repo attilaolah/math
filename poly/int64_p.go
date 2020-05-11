@@ -95,7 +95,7 @@ func (p Int64P) String() string {
 	return strings.Join(terms[1:], " ")
 }
 
-// Sort sorts the terms of the polynom, highest-first.
+// Sort sorts the terms of the polynomial, highest-first.
 func (p Int64P) Sort() {
 	sort.Sort(p)
 }
