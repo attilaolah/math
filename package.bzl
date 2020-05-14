@@ -6,13 +6,13 @@ VERSIONS = {
     "atlassian/bazel-tools": "1056bf1d619b432063841df24b9eca86eb716527",
     "bazelbuild/bazel-gazelle": "v0.21.0",
     "bazelbuild/bazel-skylib": "1.0.2",
-    "bazelbuild/rules_go": "v0.20.2",
+    "bazelbuild/rules_go": "v0.23.0",
 }
 SHA256_SUMS = {
     "atlassian/bazel-tools": "6a991df7a79db78229cbabded60c98641400f31fc88244847b519fbb904fc360",
     "bazelbuild/bazel-gazelle": "bfd86b3cbe855d6c16c6fce60d76bd51f5c8dbc9cfcaef7a2bb5c1aafd0710e8",
     "bazelbuild/bazel-skylib": "e5d90f0ec952883d56747b7604e2a15ee36e288bb556c3d0ed33e818a4d971f2",
-    "bazelbuild/rules_go": "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
+    "bazelbuild/rules_go": "6a68e269802911fa419abb940c850734086869d7fe9bc8e12aaf60a09641c818",
 }
 
 def register_repositories():
