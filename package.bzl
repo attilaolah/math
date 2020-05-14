@@ -4,13 +4,13 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # This is here to make it easier to update this file.
 VERSIONS = {
     "atlassian/bazel-tools": "1056bf1d619b432063841df24b9eca86eb716527",
-    "bazelbuild/bazel-gazelle": "v0.19.1",
+    "bazelbuild/bazel-gazelle": "v0.21.0",
     "bazelbuild/bazel-skylib": "1.0.2",
     "bazelbuild/rules_go": "v0.20.2",
 }
 SHA256_SUMS = {
     "atlassian/bazel-tools": "6a991df7a79db78229cbabded60c98641400f31fc88244847b519fbb904fc360",
-    "bazelbuild/bazel-gazelle": "86c6d481b3f7aedc1d60c1c211c6f76da282ae197c3b3160f54bd3a8f847896f",
+    "bazelbuild/bazel-gazelle": "bfd86b3cbe855d6c16c6fce60d76bd51f5c8dbc9cfcaef7a2bb5c1aafd0710e8",
     "bazelbuild/bazel-skylib": "e5d90f0ec952883d56747b7604e2a15ee36e288bb556c3d0ed33e818a4d971f2",
     "bazelbuild/rules_go": "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
 }
