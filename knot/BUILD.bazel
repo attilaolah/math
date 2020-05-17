@@ -1,4 +1,4 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
 
 go_library(
     name = "go_default_library",
@@ -6,7 +6,15 @@ go_library(
         "arc.go",
         "cross.go",
         "knot.go",
+        "reidemeister_moves.go",
+        "well_known.go",
     ],
     importpath = "github.com/attilaolah/math/knot",
     visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["knot_test.go"],
+    embed = [":go_default_library"],
 )

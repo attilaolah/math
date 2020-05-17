@@ -16,8 +16,7 @@ func (k Knot) Arcs() []*Arc {
 	a := k.start
 	arcs := []*Arc{a}
 
-	for a.Next() != k.start {
-		a = a.Next()
+	for a = a.Next(); a != k.start && a != nil; a = a.Next() {
 		arcs = append(arcs, a)
 	}
 

@@ -11,7 +11,7 @@ type Arc struct {
 func (a Arc) Prev() *Arc {
 	if a.Start == nil {
 		// Unknot. There's no previous arc.
-		return &a
+		return nil
 	}
 
 	return a.Start.In
@@ -21,7 +21,7 @@ func (a Arc) Prev() *Arc {
 func (a Arc) Next() *Arc {
 	if a.Stop == nil {
 		// Unknot. There's no next arc.
-		return &a
+		return nil
 	}
 
 	return a.Stop.Out
