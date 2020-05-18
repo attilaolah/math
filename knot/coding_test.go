@@ -13,6 +13,7 @@ func TestGrid(t *testing.T) {
 		grid knot.Grid
 	}{
 		{
+			// Simple unknot.
 			dir: knot.Directions{knot.GoLeft, knot.GoLeft, knot.GoLeft, knot.GoLeft},
 			grid: knot.Grid{
 				knot.Point{0, 0}:  knot.Cell{knot.E, knot.GoLeft},
@@ -22,6 +23,7 @@ func TestGrid(t *testing.T) {
 			},
 		},
 		{
+			// Twisted unknot.
 			dir: knot.Directions{
 				knot.GoForward, knot.GoLeft, knot.GoLeft, knot.GoLeft,
 				knot.GoUnder, knot.GoRight, knot.GoRight, knot.GoRight,
@@ -34,6 +36,42 @@ func TestGrid(t *testing.T) {
 				knot.Point{0, -1}:  knot.Cell{knot.S, knot.GoRight},
 				knot.Point{-1, -1}: knot.Cell{knot.W, knot.GoRight},
 				knot.Point{-1, 0}:  knot.Cell{knot.N, knot.GoRight},
+			},
+		},
+		{
+			// Simple trefoil.
+			dir: knot.Directions{
+				knot.GoLeft,
+				knot.GoForward,
+				knot.GoLeft,
+				knot.GoForward,
+				knot.GoForward,
+				knot.GoLeft,
+				knot.GoLeft,
+				knot.GoForward,
+				knot.GoLeft,
+				knot.GoForward,
+				knot.GoLeft,
+				knot.GoLeft,
+				knot.GoUnder,
+				knot.GoForward,
+				knot.GoLeft,
+				knot.GoForward,
+			},
+			grid: knot.Grid{
+				knot.Point{0, 0}:  knot.Cell{knot.E, knot.GoLeft},
+				knot.Point{0, 1}:  knot.Cell{knot.N, knot.GoForward},
+				knot.Point{0, 2}:  knot.Cell{knot.N, knot.GoLeft},
+				knot.Point{-1, 2}: knot.Cell{knot.NW, knot.GoForward},
+				knot.Point{-2, 2}: knot.Cell{knot.WS, knot.GoForward},
+				knot.Point{-3, 2}: knot.Cell{knot.W, knot.GoLeft},
+				knot.Point{-3, 1}: knot.Cell{knot.S, knot.GoLeft},
+				knot.Point{-2, 1}: knot.Cell{knot.SE, knot.GoForward},
+				knot.Point{-1, 1}: knot.Cell{knot.E, knot.GoLeft},
+				knot.Point{-1, 3}: knot.Cell{knot.N, knot.GoLeft},
+				knot.Point{-2, 3}: knot.Cell{knot.W, knot.GoLeft},
+				knot.Point{-2, 0}: knot.Cell{knot.S, knot.GoLeft},
+				knot.Point{-1, 0}: knot.Cell{knot.E, knot.GoForward},
 			},
 		},
 	} {

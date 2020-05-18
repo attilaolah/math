@@ -99,6 +99,9 @@ func (ds Directions) Grid() (Grid, error) {
 			g[pos] = Cell{old.Cross(o, d == GoForward), GoForward}
 		} else {
 			// Position not in use.
+			if d == GoUnder {
+				return nil, fmt.Errorf("%w: nothing to go under", InvalidCrossing(pos))
+			}
 			g[pos] = c
 		}
 		o = o.Turn(d)
@@ -161,9 +164,9 @@ func (o Orientation) Turn(to Direction) Orientation {
 	case GoForward, GoUnder:
 		return o
 	case GoLeft:
-		return (o + 1).Clamp()
+		return (o + 1).Base()
 	case GoRight:
-		return (o - 1).Clamp()
+		return (o - 1).Base()
 	}
 	panic("knot: should not happen")
 }
