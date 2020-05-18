@@ -4,6 +4,7 @@ go_library(
     name = "go_default_library",
     srcs = [
         "arc.go",
+        "coding.go",
         "cross.go",
         "knot.go",
         "reidemeister_moves.go",
@@ -15,6 +16,9 @@ go_library(
 
 go_test(
     name = "go_default_test",
-    srcs = ["knot_test.go"],
+    srcs = [
+        "coding_test.go",
+        "knot_test.go",
+    ],
     embed = [":go_default_library"],
 )

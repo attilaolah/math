@@ -3,8 +3,8 @@ package knot
 import "errors"
 
 var (
-	SlideError   = errors.New("cannot slide arc: must be next to the cross")
-	UntwistError = errors.New("cannot untwist cross: arc must cross itself")
+	SlideError   = errors.New("knot: cannot slide arc: must be next to the cross")
+	UntwistError = errors.New("knot: cannot untwist cross: arc must cross itself")
 )
 
 // Twist performs the first Reidemeister move.
