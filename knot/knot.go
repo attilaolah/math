@@ -67,13 +67,13 @@ func (k Knot) String() string {
 
 	for i, a := range arcs {
 		if a.Start != nil {
-			parts = append(parts, fmt.Sprintf("%s%d", a.Start.Dir, i+1))
+			parts = append(parts, fmt.Sprintf("%s%d", a.Start.Handedness, i+1))
 		}
 		s := fmt.Sprintf("A%d", i+1)
 		over := []string{}
 		for j, c := range crosses {
 			if c.Over == a {
-				over = append(over, fmt.Sprintf("%s%d", c.Dir, j+1))
+				over = append(over, fmt.Sprintf("%s%d", c.Handedness, j+1))
 			}
 		}
 		if len(over) != 0 {
@@ -82,7 +82,7 @@ func (k Knot) String() string {
 		parts = append(parts, s)
 	}
 	if a := arcs[len(arcs)-1]; a.Stop != nil {
-		parts = append(parts, fmt.Sprintf("%s1", a.Stop.Dir))
+		parts = append(parts, fmt.Sprintf("%s1", a.Stop.Handedness))
 	}
 
 	return strings.Join(parts, " ")

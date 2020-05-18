@@ -2,25 +2,25 @@ package knot
 
 // Right and Left 'handedness' values:
 const (
-	Right Direction = true
-	Left  Direction = false
+	Right Handedness = true
+	Left  Handedness = false
 )
 
-// Direction groups crosses into left- and right-handed.
-type Direction bool
+// Handedness groups crosses into left- and right-handed.
+type Handedness bool
 
 // A Cross is where an arc goes over another arc.
 type Cross struct {
 	// A cross has one arc over, one going in and one coming out.
 	Over, In, Out *Arc
 
-	// Direction can be right-handed (true) or left-handed (false).
-	Dir Direction
+	// Handedness can be right-handed (true) or left-handed (false).
+	Handedness Handedness
 }
 
 // String represents handadness as "R" (right) or "L" (left).
-func (d Direction) String() string {
-	if d {
+func (h Handedness) String() string {
+	if h {
 		return "R"
 	}
 
@@ -29,7 +29,7 @@ func (d Direction) String() string {
 
 // Left returns the arc to the left of the cross.
 func (c Cross) Left() *Arc {
-	if c.Dir == Left {
+	if c.Handedness == Left {
 		return c.In
 	}
 
@@ -38,7 +38,7 @@ func (c Cross) Left() *Arc {
 
 // Right returns the arc to the right of the cross.
 func (c Cross) Right() *Arc {
-	if c.Dir == Right {
+	if c.Handedness == Right {
 		return c.In
 	}
 
