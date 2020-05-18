@@ -28,10 +28,10 @@ const (
 )
 
 const (
-	GoForward Direction = iota
-	GoLeft
-	GoUnder
-	GoRight
+	Forward Direction = iota
+	TurnLeft
+	Under
+	TurnRight
 
 	// Used to clamp values.
 	MaxDirection
@@ -83,8 +83,8 @@ func (ds Directions) Grid() (Grid, error) {
 		c := Cell{o, d}
 		if old, ok := g[pos]; ok {
 			// Position already in use, check whether we can make a crossing here.
-			if d != GoForward && d != GoUnder {
-				return nil, fmt.Errorf("%w: direction must be %s or %s, got %s", InvalidCrossing(pos), GoForward, GoUnder, d)
+			if d != Forward && d != Under {
+				return nil, fmt.Errorf("%w: direction must be %s or %s, got %s", InvalidCrossing(pos), Forward, Under, d)
 			}
 			if old.IsCross() {
 				// Technically this should never happen, but still.
@@ -96,10 +96,10 @@ func (ds Directions) Grid() (Grid, error) {
 			if !old.IsPerpendicular(o) {
 				return nil, fmt.Errorf("%w: existing cell %s is not perpendicular to current orientation %s", InvalidCrossing(pos), old, o)
 			}
-			g[pos] = Cell{old.Cross(o, d == GoForward), GoForward}
+			g[pos] = Cell{old.Cross(o, d == Forward), Forward}
 		} else {
 			// Position not in use.
-			if d == GoUnder {
+			if d == Under {
 				return nil, fmt.Errorf("%w: nothing to go under", InvalidCrossing(pos))
 			}
 			g[pos] = c
@@ -161,11 +161,11 @@ func (o Orientation) Clamp() Orientation {
 // Turn towards direction.
 func (o Orientation) Turn(to Direction) Orientation {
 	switch to.Clamp() {
-	case GoForward, GoUnder:
+	case Forward, Under:
 		return o
-	case GoLeft:
+	case TurnLeft:
 		return (o + 1).Base()
-	case GoRight:
+	case TurnRight:
 		return (o - 1).Base()
 	}
 	panic("knot: should not happen")
@@ -220,13 +220,13 @@ func (d Direction) IsStraight() bool {
 // String returns a short, human-readable representation.
 func (d Direction) String() string {
 	switch d.Clamp() {
-	case GoForward:
+	case Forward:
 		return "F"
-	case GoLeft:
+	case TurnLeft:
 		return "L"
-	case GoUnder:
+	case Under:
 		return "U"
-	case GoRight:
+	case TurnRight:
 		return "R"
 	}
 	panic("knot: should not happen")
