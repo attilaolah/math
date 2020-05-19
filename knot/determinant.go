@@ -26,26 +26,25 @@ func (k *Knot) Det() uint64 {
 
 // Matrix generates the matrix for calculating determinant of the Knot.
 func (k *Knot) Matrix() *poly.Int64M {
-	arcs, crosses := k.Arcs(), k.Crosses()
+	crosses := k.Crosses()
 	if len(crosses) == 0 {
 		return nil
 	}
 
-	m := poly.NewInt64M(uint(len(crosses)), uint(len(arcs)))
-	// TODO: Only traverse crosses to reduce complexity!
-	for i, c := range crosses {
-		for j, a := range arcs {
+	m := poly.NewInt64M(uint(len(crosses)), uint(len(crosses)))
+	for row, rc := range crosses {
+		for col, cc := range crosses {
 			var f int64
-			if c.In == a {
+			if rc.In == cc.Out {
 				f -= 1
 			}
-			if c.Out == a {
+			if rc.Out == cc.Out {
 				f -= 1
 			}
-			if c.Over == a {
+			if rc.Over == cc.Out {
 				f += 2
 			}
-			m.Elements[i*int(m.Stride)+j][0].C = f
+			m.Elements[row*int(m.Stride)+col][0].C = f
 		}
 	}
 
