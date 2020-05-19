@@ -16,6 +16,7 @@ package poly
 
 import (
 	"fmt"
+	"math/rand"
 	"strings"
 )
 
@@ -67,6 +68,11 @@ func (m Int64M) Minor(i, j uint) Int64M {
 	}
 
 	return ret
+}
+
+// AnyMinor randomly picks a minor and returns it.
+func (m Int64M) AnyMinor() Int64M {
+	return m.Minor(uint(rand.Intn(int(m.Stride))), uint(rand.Intn(int(m.Stride))))
 }
 
 // String returns a compact, human-readable representation of the matrix.

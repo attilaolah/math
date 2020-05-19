@@ -6,18 +6,21 @@ go_library(
         "arc.go",
         "coding.go",
         "cross.go",
+        "determinant.go",
         "knot.go",
         "reidemeister_moves.go",
         "well_known.go",
     ],
     importpath = "github.com/attilaolah/math/knot",
     visibility = ["//visibility:public"],
+    deps = ["//poly:go_default_library"],
 )
 
 go_test(
     name = "go_default_test",
     srcs = [
         "coding_test.go",
+        "determinant_test.go",
         "knot_test.go",
     ],
     embed = [":go_default_library"],
