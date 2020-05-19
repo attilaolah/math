@@ -29,6 +29,18 @@ type Int64M struct {
 	Stride uint
 }
 
+// NewInt64M creates a new zero-filled matrix wich each element set to the constant value 0.
+func NewInt64M(rows, cols uint) *Int64M {
+	m := Int64M{
+		Elements: make([]Int64P, rows*cols),
+		Stride:   cols,
+	}
+	for i := range m.Elements {
+		m.Elements[i] = Int64P{Int64T{}}
+	}
+	return &m
+}
+
 // Det calculates the determinant of the square matrix.
 func (m Int64M) Det() Int64P {
 	if m.Stride*m.Stride != uint(len(m.Elements)) {

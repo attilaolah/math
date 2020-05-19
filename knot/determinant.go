@@ -31,10 +31,7 @@ func (k *Knot) Matrix() *poly.Int64M {
 		return nil
 	}
 
-	m := poly.Int64M{
-		Elements: make([]poly.Int64P, len(crosses)*len(arcs)),
-		Stride:   uint(len(crosses)),
-	}
+	m := poly.NewInt64M(uint(len(crosses)), uint(len(arcs)))
 	// TODO: Only traverse crosses to reduce complexity!
 	for i, c := range crosses {
 		for j, a := range arcs {
@@ -48,9 +45,9 @@ func (k *Knot) Matrix() *poly.Int64M {
 			if c.Over == a {
 				f += 2
 			}
-			m.Elements[i*int(m.Stride)+j] = poly.Int64P{poly.Int64T{C: f}}
+			m.Elements[i*int(m.Stride)+j][0].C = f
 		}
 	}
 
-	return &m
+	return m
 }
