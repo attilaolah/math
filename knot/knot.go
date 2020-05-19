@@ -25,15 +25,15 @@ func (k Knot) Arcs() []*Arc {
 
 // Crosses returns crosses corresponding to each arc, in order.
 func (k Knot) Crosses() []*Cross {
-	if k.start.Start == nil {
+	a := k.start
+	if a.Start == nil {
 		// Unknot. There are no crosses.
 		return nil
 	}
 
-	arcs := k.Arcs()
-	crosses := make([]*Cross, len(arcs))
-	for i, a := range arcs {
-		crosses[i] = a.Start
+	crosses := []*Cross{k.start.Start}
+	for a = a.Next(); a != k.start && a != nil; a = a.Next() {
+		crosses = append(crosses, a.Start)
 	}
 
 	return crosses
