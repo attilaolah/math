@@ -39,10 +39,10 @@ rules_go_setup()
 github_archive(
     name = "com_github_atlassian_bazel_tools",
     repo = "atlassian/bazel-tools",
+    sha256 = "6a991df7a79db78229cbabded60c98641400f31fc88244847b519fbb904fc360",
     strip_prefix = "bazel-tools-{version}",
     url = "archive/{version}.zip",
     version = "1056bf1d619b432063841df24b9eca86eb716527",
-    sha256 = "6a991df7a79db78229cbabded60c98641400f31fc88244847b519fbb904fc360",
 )
 
 load("@com_github_atlassian_bazel_tools//golangcilint:deps.bzl", "golangcilint_dependencies")
