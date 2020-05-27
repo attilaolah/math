@@ -19,7 +19,6 @@ golangcilint(
 bzl_library(
     name = "package",
     srcs = [
-        "deps.bzl",
         "package.bzl",
     ],
 )
