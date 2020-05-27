@@ -20,6 +20,7 @@ load(
     "bazel_gazelle",
     "bazel_skylib",
     "rules_go",
+    "rules_python",
 )
 
 bazel_gazelle()
@@ -35,6 +36,12 @@ rules_go()
 load("@bazel_federation//setup:rules_go.bzl", "rules_go_setup")
 
 rules_go_setup()
+
+rules_python()
+
+load("@bazel_federation//setup:rules_python.bzl", "rules_python_setup")
+
+rules_python_setup()
 
 github_archive(
     name = "com_github_atlassian_bazel_tools",
