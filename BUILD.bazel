@@ -9,6 +9,8 @@ golangcilint(
     name = "golangci",
     config = "//:.golangci.yml",
     paths = [
+        # keep sorted
+        "./knot",
         "./poly",
     ],
     prefix = "github.com/attilaolah/math",
