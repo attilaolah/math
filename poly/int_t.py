@@ -1,3 +1,7 @@
+"""Module int_t impolements an int-type indeterminate.
+
+It is used by int_p for constructing polynomials.
+"""
 from typing import Iterable, List, Union
 
 
@@ -28,66 +32,66 @@ class Ind(List[int]):
             return False
         if len(self) != len(other):
             return False
-        for a, b in zip(self, other):
-            if a != b:
+        for ind_a, ind_b in zip(self, other):
+            if ind_a != ind_b:
                 return False
         return True
 
     def __repr__(self) -> None:
         """A compact, human-readable representation of the indeterminates."""
-        s: List[str]
+        parts: List[str]
         simple = 'x', 'y', 'z'
 
         if not self:
             return "1"
         if len(self) <= len(simple):
-            s = simple[:len(self)]
+            parts = simple[:len(self)]
         else:
-            s = ['x'+self._sub(i) for i, _ in enumerate(self)]
+            parts = ['x'+self._sub(i) for i, _ in enumerate(self)]
 
         ret = ''
-        for i, x in enumerate(self):
-            if x:
-                ret += s[i]
-                if x != 1:
-                    ret += self._sup(x)
+        for i, ind in enumerate(self):
+            if ind:
+                ret += parts[i]
+                if ind != 1:
+                    ret += self._sup(ind)
         if not ret:
             return '1'
 
         return ret
 
     @classmethod
-    def _sub(cls, x: int) -> str:
-        """Turn x into a Unicode subscript."""
-        if not x:
+    def _sub(cls, ind: int) -> str:
+        """Turn ind into a Unicode subscript."""
+        if not ind:
             return '₀'
-        return cls._smap(x, '₀₁₂₃₄₅₆₇₈₉₋')
+        return cls._smap(ind, '₀₁₂₃₄₅₆₇₈₉₋')
 
     @classmethod
-    def _sup(cls, x: int) -> str:
-        """Turn x into a Unicode superscript."""
-        return cls._smap(x, '⁰¹²³⁴⁵⁶⁷⁸⁹¯')
+    def _sup(cls, ind: int) -> str:
+        """Turn ind into a Unicode superscript."""
+        return cls._smap(ind, '⁰¹²³⁴⁵⁶⁷⁸⁹¯')
 
     @staticmethod
-    def _smap(x: int, chars: str) -> str:
-        """Turn x into a Unicode subscript or superscript string."""
-        abs_x, s = abs(x), ''
+    def _smap(ind: int, chars: str) -> str:
+        """Turn ind into a Unicode subscript or superscript string."""
+        abs_x, ret = abs(ind), ''
         while abs_x:
-            s = chars[abs_x%10] + s
+            ret = chars[abs_x%10] + ret
             abs_x //= 10
-        if x < 0:
-            s = chars[10] + s
-        return s
+        if ind < 0:
+            ret = chars[10] + ret
+        return ret
 
 
 class IntT(Ind):
     """IntT is a single term containing an int coefficient."""
-    c: int
+    const: int
 
-    def __init__(self, c: int = 0, ind: Iterable[int] = ()) -> None:
+    def __init__(self, const: int = 0, ind: Iterable[int] = ()) -> None:
         """Initialise with a constant and optional terms."""
         super().__init__(*ind)
-        self.c = c
+        self.const = const
 
     def __mul__(self, other: Union['IntT', int]) -> 'IntT':
         """Returns the product of self and other."""
@@ -95,14 +99,14 @@ class IntT(Ind):
             return NotImplemented
 
         if isinstance(other, int):
-            return self.__class__(self.c*other, self)
+            return self.__class__(self.const*other, self)
 
-        return self.__class__(self.c*other.c, super().__mul__(other))
+        return self.__class__(self.const*other.const, super().__mul__(other))
 
     def __eq__(self, other: 'IntT') -> bool:
         if not isinstance(other, type(self)):
             return False
-        return (self.c == other.c) and super().__eq__(other)
+        return (self.const == other.const) and super().__eq__(other)
 
     def __gt__(self, other: 'IntT') -> bool:
         """Compares two terms."""
@@ -110,21 +114,21 @@ class IntT(Ind):
             raise TypeError(
                 "'>' not supported between instances of '{}' and '{}'"
                 .format(type(self), type(other)))
-        for a, b in zip(self, other):
-            if a == b:
+        for ind_a, ind_b in zip(self, other):
+            if ind_a == ind_b:
                 continue
-            return a > b
+            return ind_a > ind_b
         return False
 
     def __repr__(self) -> str:
         """A compact, human-readable representation of the term."""
-        if not self.c:
+        if not self.const:
             return "0"
 
-        s = super().__repr__()
-        if self.c == 1:
-            return s
-        if s == '1':
-            return str(self.c)
+        ret = super().__repr__()
+        if self.const == 1:
+            return ret
+        if ret == '1':
+            return str(self.const)
 
-        return '{:d}{}'.format(self.c, s)
+        return '{:d}{}'.format(self.const, ret)
