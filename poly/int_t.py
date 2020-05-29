@@ -128,11 +128,3 @@ class IntT(Ind):
             return str(self.c)
 
         return '{:d}{}'.format(self.c, s)
-
-
-if __name__ == '__main__':
-    print(IntT(8, [2, 4])*3)
-    print(IntT(8, [2, 4])*IntT(3, [0, 0, 1]))
-    print(IntT(8, [2, 4])*3 == IntT(8, [2, 4])*IntT(3, [0, 0, 1]))
-    print(IntT(8, [2, 4])*3 == IntT(8, [2, 4])*IntT(3, [0, 0]))
-    print(IntT(3, [0, 0])*9)
