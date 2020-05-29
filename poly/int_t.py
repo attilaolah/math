@@ -1,7 +1,4 @@
-"""Module int_t impolements an int-type indeterminate.
-
-It is used by int_p for constructing polynomials.
-"""
+"""Module int_t impolements integer indeterminates for polynomials."""
 from typing import Iterable, List, Union
 
 
@@ -77,7 +74,7 @@ class Ind(List[int]):
         """Turn ind into a Unicode subscript or superscript string."""
         abs_x, ret = abs(ind), ''
         while abs_x:
-            ret = chars[abs_x%10] + ret
+            ret = chars[abs_x % 10] + ret
             abs_x //= 10
         if ind < 0:
             ret = chars[10] + ret
