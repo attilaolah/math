@@ -26,7 +26,9 @@ class Ind(List[int]):
     def __eq__(self, other: 'Ind') -> bool:
         """Compares two sets of indeterminates for equality."""
         if not isinstance(other, type(self)):
-            return False
+            raise TypeError(
+                "'==' not supported between instances of '{}' and '{}'"
+                .format(type(self), type(other)))
         if len(self) != len(other):
             return False
         for ind_a, ind_b in zip(self, other):
@@ -101,9 +103,12 @@ class IntT(Ind):
         return self.__class__(self.const*other.const, super().__mul__(other))
 
     def __eq__(self, other: 'IntT') -> bool:
+        """Compares two terms for equality."""
         if not isinstance(other, type(self)):
-            return False
-        return (self.const == other.const) and super().__eq__(other)
+            raise TypeError(
+                "'==' not supported between instances of '{}' and '{}'"
+                .format(type(self), type(other)))
+        return self.ind_eq(other) and (self.const == other.const)
 
     def __gt__(self, other: 'IntT') -> bool:
         """Compares two terms."""
@@ -129,3 +134,9 @@ class IntT(Ind):
             return str(self.const)
 
         return '{:d}{}'.format(self.const, ret)
+
+    def ind_eq(self, other: 'IntT') -> bool:
+        """Compares only the indeterminates (not the constant) for equality."""
+        if not isinstance(other, type(self)):
+            return NotImplemented
+        return super().__eq__(other)

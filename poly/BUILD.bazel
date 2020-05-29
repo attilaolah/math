@@ -29,6 +29,19 @@ py_library(
 )
 
 py_library(
+    name = "int_p",
+    srcs = ["int_p.py"],
+    deps = [":int_t"],
+)
+
+py_test(
+    name = "int_p_test",
+    srcs = ["int_p_test.py"],
+    python_version = "PY3",
+    deps = [":int_p"],
+)
+
+py_library(
     name = "int_t",
     srcs = ["int_t.py"],
     srcs_version = "PY3",

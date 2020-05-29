@@ -34,13 +34,13 @@ class TestIntT(unittest.TestCase):
         for item, res in [
                 (int_t.IntT(), '0'),
                 (int_t.IntT(0), '0'),
-                (int_t.IntT(0, [1, 2, 3]), '0'),
-                (int_t.IntT(10, [1, 2, 3]), '10xy²z³'),
-                (int_t.IntT(-20, [-1, 0, 1]), '-20x¯¹z'),
-                (int_t.IntT(5, []), '5'),
-                (int_t.IntT(-8, [0, 0]), '-8'),
-                (int_t.IntT(1, [0, 0, 1]), 'z'),
-                (int_t.IntT(1, [0, 1, 1]), 'yz'),
+                (int_t.IntT(0, (1, 2, 3)), '0'),
+                (int_t.IntT(10, (1, 2, 3)), '10xy²z³'),
+                (int_t.IntT(-20, (-1, 0, 1)), '-20x¯¹z'),
+                (int_t.IntT(5, ()), '5'),
+                (int_t.IntT(-8, (0, 0)), '-8'),
+                (int_t.IntT(1, (0, 0, 1)), 'z'),
+                (int_t.IntT(1, (0, 1, 1)), 'yz'),
         ]:
             self.assertEqual(repr(item), res)
 
