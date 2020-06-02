@@ -11,9 +11,9 @@ go_library(
         "reidemeister_moves.go",
         "well_known.go",
     ],
-    importpath = "github.com/attilaolah/math/knot",
+    importpath = "github.com/attilaolah/math/go/knot",
     visibility = ["//visibility:public"],
-    deps = ["//poly:go_default_library"],
+    deps = ["//go/poly:go_default_library"],
 )
 
 go_test(

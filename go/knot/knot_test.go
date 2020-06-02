@@ -3,7 +3,7 @@ package knot_test
 import (
 	"testing"
 
-	"github.com/attilaolah/math/knot"
+	"github.com/attilaolah/math/go/knot"
 )
 
 func TestArcs(t *testing.T) {

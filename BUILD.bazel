@@ -1,20 +1,4 @@
-load("@bazel_gazelle//:def.bzl", "gazelle")
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
-load("@com_github_atlassian_bazel_tools//golangcilint:def.bzl", "golangcilint")
-
-# gazelle:prefix github.com/attilaolah/math
-gazelle(name = "gazelle")
-
-golangcilint(
-    name = "golangci",
-    config = "//:.golangci.yml",
-    paths = [
-        # keep sorted
-        "./knot",
-        "./poly",
-    ],
-    prefix = "github.com/attilaolah/math",
-)
 
 bzl_library(
     name = "package",

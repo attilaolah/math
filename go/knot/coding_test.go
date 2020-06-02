@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/attilaolah/math/knot"
+	"github.com/attilaolah/math/go/knot"
 )
 
 func TestGrid(t *testing.T) {

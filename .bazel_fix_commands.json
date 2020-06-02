@@ -4,7 +4,7 @@
     "command": "bazel",
     "args": [
       "run",
-      "//:gazelle"
+      "//go:gazelle"
     ]
   },
   {

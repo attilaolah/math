@@ -1,7 +1,7 @@
 """Module int_p implements a polynomial wint integer terms and coefficients."""
 from typing import Iterable, List, Tuple
 
-from poly.int_t import IntT
+from .int_t import IntT
 
 
 # TODO: Subclass typing.List[IntT] when pylint supports this.

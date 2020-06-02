@@ -3,7 +3,7 @@ package knot
 import (
 	"fmt"
 
-	"github.com/attilaolah/math/poly"
+	"github.com/attilaolah/math/go/poly"
 )
 
 // Det calculates the Knot's determinant.

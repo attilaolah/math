@@ -17,7 +17,7 @@ package poly_test
 import (
 	"testing"
 
-	"github.com/attilaolah/math/poly"
+	"github.com/attilaolah/math/go/poly"
 )
 
 func TestInt64PAdd(t *testing.T) {

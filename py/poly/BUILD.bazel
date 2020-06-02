@@ -1,0 +1,44 @@
+load("@rules_python//python:defs.bzl", "py_library", "py_test")
+
+py_library(
+    name = "poly",
+    srcs = ["__init__.py"],
+    deps = [
+        ":int_p",
+        ":int_t",
+    ],
+)
+
+py_test(
+    name = "poly_test",
+    srcs = ["poly_test.py"],
+    imports = [".."],
+    deps = [":poly"],
+)
+
+py_library(
+    name = "int_p",
+    srcs = ["int_p.py"],
+    deps = [":int_t"],
+)
+
+py_test(
+    name = "int_p_test",
+    srcs = ["int_p_test.py"],
+    imports = [".."],
+    python_version = "PY3",
+    deps = [":int_p"],
+)
+
+py_library(
+    name = "int_t",
+    srcs = ["int_t.py"],
+)
+
+py_test(
+    name = "int_t_test",
+    srcs = ["int_t_test.py"],
+    imports = [".."],
+    python_version = "PY3",
+    deps = [":int_t"],
+)

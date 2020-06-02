@@ -18,7 +18,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/attilaolah/math/poly"
+	"github.com/attilaolah/math/go/poly"
 )
 
 func TestInt64MDet(t *testing.T) {
