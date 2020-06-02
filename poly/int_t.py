@@ -2,7 +2,9 @@
 from typing import Iterable, List, Union
 
 
-class Ind(List[int]):
+# TODO: Subclass typing.List[int] when pylint supports this.
+# See https://github.com/PyCQA/pylint/issues/3129.
+class Ind(list):
     """Ind represents the indeterminates of a single term."""
 
     def __init__(self, *args: int) -> None:
