@@ -56,6 +56,5 @@ class IntP(list):
             if ret[size-1].ind_eq(term):
                 ret[size-1].const += term.const
                 continue
-            print('XXX: {} > {}'.format(ret, term))
             ret.append(term)
         return ret
