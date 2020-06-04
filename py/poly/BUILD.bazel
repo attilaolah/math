@@ -41,4 +41,5 @@ py_test(
     imports = [".."],
     python_version = "PY3",
     deps = [":int_t"],
+    data = ["//testdata/poly:int_t.json"],
 )

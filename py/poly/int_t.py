@@ -1,5 +1,6 @@
 """Module int_t impolements integer indeterminates for polynomials."""
-from typing import Iterable, List, Union
+import json
+from typing import Dict, Iterable, List, Union
 
 
 # TODO: Subclass typing.List[int] when pylint supports this.
@@ -62,6 +63,33 @@ class Ind(list):
         return ret
 
     @classmethod
+    def from_json(cls, json_data: Union[str, bytes, bytearray]) -> 'Ind':
+        """Decode indeterminates from JSON.
+
+        Arguments:
+            json_data: JSON-encoded indeterminates. Must be an array of
+                       integers.
+        Returns:
+            The decoded object.
+        """
+        return cls.from_data(json.loads(json_data))
+
+    @staticmethod
+    def from_data(data: List[int]) -> 'Ind':
+        if not isinstance(data, list):
+            raise ValueError('Expected a list of integers, got: {}.'
+                             .format(type(data)))
+        for i, item in enumerate(data, 1):
+            if not isinstance(item, int):
+                raise ValueError('Expected integer at item {}, got: {}.'
+                                 .format(i, type(item)))
+        # Explicitly spell out Ind, so subclasses can call super().from_data().
+        return Ind(*data)
+
+    def to_json(self) -> str:
+        return json.dumps(self)
+
+    @classmethod
     def _sub(cls, ind: int) -> str:
         """Turn ind into a Unicode subscript."""
         if not ind:
@@ -71,7 +99,7 @@ class Ind(list):
     @classmethod
     def _sup(cls, ind: int) -> str:
         """Turn ind into a Unicode superscript."""
-        return cls._smap(ind, '⁰¹²³⁴⁵⁶⁷⁸⁹¯')
+        return cls._smap(ind, '⁰¹²³⁴⁵⁶⁷⁸⁹⁻')
 
     @staticmethod
     def _smap(ind: int, chars: str) -> str:
@@ -136,6 +164,16 @@ class IntT(Ind):
             return str(self.const)
 
         return '{:d}{}'.format(self.const, ret)
+
+    @classmethod
+    def from_data(cls, data: Dict[str, Union[int, List[int]]]) -> 'IntT':
+        if not isinstance(data, dict):
+            raise ValueError('Expected a dict, got: {}.' .format(type(data)))
+        const = data.get('const', 0)
+        if not isinstance(const, int):
+            raise ValueError('Field "const": expected integer, got: {}'
+                             .format(type(const)))
+        return cls(const, super().from_data(data.get('ind', [])))
 
     def ind_eq(self, other: 'IntT') -> bool:
         """Compares only the indeterminates (not the constant) for equality."""
