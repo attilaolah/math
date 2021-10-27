@@ -15,12 +15,19 @@ github_archive(
     version = "0.0.1",
 )
 
+github_archive(
+    name = "rules_python",
+    repo = "bazelbuild/rules_python",
+    url = "releases/download/{version}/rules_python-{version}.tar.gz",
+    version="0.4.0",
+    sha256="954aa89b491be4a083304a2cb838019c8b8c3720a7abb9c4cb81ac7a24230cea",
+)
+
 load(
     "@bazel_federation//:repositories.bzl",
     "bazel_gazelle",
     "bazel_skylib",
     "rules_go",
-    "rules_python",
 )
 
 bazel_gazelle()
@@ -36,12 +43,6 @@ rules_go()
 load("@bazel_federation//setup:rules_go.bzl", "rules_go_setup")
 
 rules_go_setup()
-
-rules_python()
-
-load("@bazel_federation//setup:rules_python.bzl", "rules_python_setup")
-
-rules_python_setup()
 
 github_archive(
     name = "com_github_atlassian_bazel_tools",
