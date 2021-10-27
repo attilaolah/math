@@ -8,14 +8,6 @@ workspace(
 load("//:package.bzl", "github_archive")
 
 github_archive(
-    name = "bazel_federation",
-    repo = "bazelbuild/bazel-federation",
-    sha256 = "506dfbfd74ade486ac077113f48d16835fdf6e343e1d4741552b450cfc2efb53",
-    url = "releases/download/{version}/bazel_federation-{version}.tar.gz",
-    version = "0.0.1",
-)
-
-github_archive(
     name = "rules_python",
     repo = "bazelbuild/rules_python",
     url = "releases/download/{version}/rules_python-{version}.tar.gz",
@@ -23,26 +15,29 @@ github_archive(
     sha256="954aa89b491be4a083304a2cb838019c8b8c3720a7abb9c4cb81ac7a24230cea",
 )
 
-load(
-    "@bazel_federation//:repositories.bzl",
-    "bazel_gazelle",
-    "bazel_skylib",
-    "rules_go",
+github_archive(
+    name = "io_bazel_rules_go",
+    repo = "bazelbuild/rules_go",
+    url = "releases/download/v{version}/rules_go-v{version}.zip",
+    version="0.29.0",
+    sha256 = "2b1641428dff9018f9e85c0384f03ec6c10660d935b750e3fa1492a281a53b0f",
 )
 
-bazel_gazelle()
+github_archive(
+    name = "bazel_gazelle",
+    repo = "bazelbuild/bazel-gazelle",
+    url = "releases/download/v{version}/bazel-gazelle-v{version}.tar.gz",
+    version="0.24.0",
+    sha256 = "de69a09dc70417580aabf20a28619bb3ef60d038470c7cf8442fafcf627c21cb",
+)
 
-bazel_skylib()
-
-load("@bazel_federation//setup:bazel_skylib.bzl", "bazel_skylib_setup")
-
-bazel_skylib_setup()
-
-rules_go()
-
-load("@bazel_federation//setup:rules_go.bzl", "rules_go_setup")
-
-rules_go_setup()
+github_archive(
+    name = "bazel_skylib",
+    repo = "bazelbuild/bazel-skylib",
+    url = "releases/download/{version}/bazel-skylib-{version}.tar.gz",
+    version = "1.1.1",
+    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
+)
 
 github_archive(
     name = "com_github_atlassian_bazel_tools",
@@ -53,7 +48,18 @@ github_archive(
     version = "1056bf1d619b432063841df24b9eca86eb716527",
 )
 
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 load("@com_github_atlassian_bazel_tools//golangcilint:deps.bzl", "golangcilint_dependencies")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains(version = "1.17.1")
+
+gazelle_dependencies()
+
+bazel_skylib_workspace()
 
 golangcilint_dependencies()
 
