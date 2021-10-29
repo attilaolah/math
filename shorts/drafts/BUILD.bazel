@@ -1,0 +1,11 @@
+load("@rules_python//python:defs.bzl", "py_binary")
+load("@third_party//:requirements.bzl", "requirement")
+
+py_binary(
+    name = "circle",
+    srcs = ["circle.py"],
+    deps = [
+        requirement("manim"),
+    ],
+)
+
