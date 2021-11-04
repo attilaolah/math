@@ -1,8 +1,5 @@
 import manim as m
 
-# How many seconds to write a single character?
-WRITE_SPEED = 1/10
-
 
 class MetricLoopFunction(m.Scene):
     """Metric loop function scene."""
@@ -11,7 +8,7 @@ class MetricLoopFunction(m.Scene):
     def construct(self):
         """Construct the scene."""
         # In this video, I'll try to describe a function that takes a specific
-        # kind of *loop* as its input, and maps it to a real number.
+        # kind of *loop* as its input, and maps it to the unit interval.
 
         f = m.Tex("f").scale(2)
         unction = m.Tex("unction").scale(2).next_to(f, buff=0)
@@ -20,61 +17,45 @@ class MetricLoopFunction(m.Scene):
         self.wait(1)
 
         fm = m.MathTex("f").scale(2).move_to(f)
-        self.play(m.AnimationGroup(
+        self.play(
             m.ReplacementTransform(f, fm),
             m.FadeOut(unction),
-        ))
-        self.wait(1)
+        )
 
         f = fm
         del fm
 
-        # TODO: fix the kerning (set buf to the right value)!
-        loop = m.Tex("(", "loop", ")", "$f(x)$").scale(2).next_to(f)
-        self.play(m.Write(loop))
-
-        self.wait(5)
-        return
-
-
-        #f = m.Tex("$f$").scale(2).next_to(function)
-        line = m.VGroup(function, f).center()
-        #self.play(m.AnimationGroup(
-        #    m.Write(f),#, run_time=WRITE_SPEED),
-        #    m.Write(unction)#, run_time=len("unction")*WRITE_SPEED),
-        #))
-        self.play(m.Write(line))
-        self.wait(1)
-
-        #self.wait(5)
-        #return
-
-        self.play(m.FadeOut(function))
-        self.wait(1)
-
-        # TODO:
-        tex = m.MathTex(
-            ":",
-            #r"\bigcirc",
-            "(loop)",
-            "=",
-            "r",
-            ",",
-            "r",
-            r"\in",
-            r"\mathbb{R}",
-        ).scale(2).next_to(f)
-        line.add(tex)
-
+        tex = m.MathTex("f", ":", r"\mathbb{L}_m", r"\to", "[0,1)").scale(2)
+        tex.align_to(f, direction=m.LEFT)
+        tex.remove(tex[0])
         self.play(m.Write(tex))
 
-        # TODO.
+        lbb = tex[1].copy()
+        line_1 = m.VGroup(f, tex)
+
+        line_2 = m.MathTex(r"\mathbb{L}_m", "=", r"\{", "L", r"\mid", "L(x)",
+                           r"\in", "M", r"\}")
+        line_2.scale(2)
+        #line_2.remove(line_2[0])
+
+        self.add(lbb)
+        self.play(
+            line_1.animate.scale(1/2).to_edge(m.UP).to_edge(m.LEFT),
+            lbb.animate.align_to(line_2, direction=m.LEFT),
+            #m.Write(line_2),
+            #tex.animate.center(),
+        )
+        self.wait()
+
+        #line_2 = m.MathTex(r"\mathbb{L}_m", "=", r"\{", "L", r"\mid", r"\}")
+        line_2.remove(line_2[0])
+        self.play(m.Write(line_2))
 
         # If you don't know what a loop is, it's basically what it sounds like.
 
         # TODO.
 
-        # You can think of it as a closed line, like a circle or some polygon,
+        # You can think of it as a closed curve, like a circle or some polygon,
         # but more precisely it is a *continuous function* that maps the *unit
         # interval* to some *topological space*, in such a way that the
         # boundaries 0 and 1 end up being mapped to the same value.
