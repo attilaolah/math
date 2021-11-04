@@ -52,6 +52,7 @@ load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 load("@bazel_skylib//:workspace.bzl", "bazel_skylib_workspace")
 load("@com_github_atlassian_bazel_tools//golangcilint:deps.bzl", "golangcilint_dependencies")
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@rules_python//python:pip.bzl", "pip_install")
 
 go_rules_dependencies()
 
@@ -62,5 +63,10 @@ gazelle_dependencies()
 bazel_skylib_workspace()
 
 golangcilint_dependencies()
+
+pip_install(
+    name = "third_party",
+    requirements = "//:requirements.txt",
+)
 
 # gazelle:repo bazel_gazelle
