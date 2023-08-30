@@ -4,9 +4,7 @@ from typing import Iterable, List, Tuple
 from .int_t import IntT
 
 
-# TODO: Subclass typing.List[IntT] when pylint supports this.
-# See https://github.com/PyCQA/pylint/issues/3129.
-class IntP(list):
+class IntP(list[IntT]):
     """A polynomial with int terms and coefficients.
 
     This type implements a sparse representation, i.e. only non-zero terms are

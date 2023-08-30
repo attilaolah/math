@@ -3,9 +3,7 @@ import json
 from typing import Dict, Iterable, List, Union
 
 
-# TODO: Subclass typing.List[int] when pylint supports this.
-# See https://github.com/PyCQA/pylint/issues/3129.
-class Ind(list):
+class Ind(list[int]):
     """Ind represents the indeterminates of a single term."""
 
     def __init__(self, *args: int) -> None:
