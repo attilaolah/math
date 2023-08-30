@@ -1,5 +1,5 @@
 """Module int_p implements a polynomial wint integer terms and coefficients."""
-from typing import Iterable, List, Tuple
+from typing import Iterable
 
 from .int_t import IntT
 
@@ -11,7 +11,7 @@ class IntP(list[IntT]):
     stored.
     """
 
-    def __init__(self, *args: Tuple[int, Iterable[int]]) -> None:
+    def __init__(self, *args: tuple[int, Iterable[int]]) -> None:
         """Initialise with a list of constants and terms."""
         for const, ind in args:
             self.append(IntT(const, ind))
@@ -26,7 +26,7 @@ class IntP(list[IntT]):
         return ret._compact()
 
     def __repr__(self) -> str:
-        terms: List[str] = []
+        terms: list[str] = []
 
         for term in self:
             if not term.const:

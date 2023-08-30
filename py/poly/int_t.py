@@ -1,6 +1,6 @@
 """Module int_t impolements integer indeterminates for polynomials."""
 import json
-from typing import Dict, Iterable, List, Union
+from typing import Iterable, Union
 
 
 class Ind(list[int]):
@@ -39,7 +39,7 @@ class Ind(list[int]):
 
     def __repr__(self) -> None:
         """A compact, human-readable representation of the indeterminates."""
-        parts: List[str]
+        parts: list[str]
         simple = 'x', 'y', 'z'
 
         if not self:
@@ -73,7 +73,7 @@ class Ind(list[int]):
         return cls.from_data(json.loads(json_data))
 
     @staticmethod
-    def from_data(data: List[int]) -> 'Ind':
+    def from_data(data: list[int]) -> 'Ind':
         if not isinstance(data, list):
             raise ValueError('Expected a list of integers, got: {}.'
                              .format(type(data)))
@@ -164,7 +164,7 @@ class IntT(Ind):
         return '{:d}{}'.format(self.const, ret)
 
     @classmethod
-    def from_data(cls, data: Dict[str, Union[int, List[int]]]) -> 'IntT':
+    def from_data(cls, data: dict[str, Union[int, list[int]]]) -> 'IntT':
         if not isinstance(data, dict):
             raise ValueError('Expected a dict, got: {}.' .format(type(data)))
         const = data.get('const', 0)
