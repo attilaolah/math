@@ -38,8 +38,8 @@ py_library(
 py_test(
     name = "int_t_test",
     srcs = ["int_t_test.py"],
+    data = ["//testdata/poly:int_t.json"],
     imports = [".."],
     python_version = "PY3",
     deps = [":int_t"],
-    data = ["//testdata/poly:int_t.json"],
 )

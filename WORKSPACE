@@ -10,33 +10,33 @@ load("//:package.bzl", "github_archive")
 github_archive(
     name = "rules_python",
     repo = "bazelbuild/rules_python",
+    sha256 = "954aa89b491be4a083304a2cb838019c8b8c3720a7abb9c4cb81ac7a24230cea",
     url = "releases/download/{version}/rules_python-{version}.tar.gz",
-    version="0.4.0",
-    sha256="954aa89b491be4a083304a2cb838019c8b8c3720a7abb9c4cb81ac7a24230cea",
+    version = "0.4.0",
 )
 
 github_archive(
     name = "io_bazel_rules_go",
     repo = "bazelbuild/rules_go",
-    url = "releases/download/v{version}/rules_go-v{version}.zip",
-    version="0.29.0",
     sha256 = "2b1641428dff9018f9e85c0384f03ec6c10660d935b750e3fa1492a281a53b0f",
+    url = "releases/download/v{version}/rules_go-v{version}.zip",
+    version = "0.29.0",
 )
 
 github_archive(
     name = "bazel_gazelle",
     repo = "bazelbuild/bazel-gazelle",
-    url = "releases/download/v{version}/bazel-gazelle-v{version}.tar.gz",
-    version="0.24.0",
     sha256 = "de69a09dc70417580aabf20a28619bb3ef60d038470c7cf8442fafcf627c21cb",
+    url = "releases/download/v{version}/bazel-gazelle-v{version}.tar.gz",
+    version = "0.24.0",
 )
 
 github_archive(
     name = "bazel_skylib",
     repo = "bazelbuild/bazel-skylib",
+    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
     url = "releases/download/{version}/bazel-skylib-{version}.tar.gz",
     version = "1.1.1",
-    sha256 = "c6966ec828da198c5d9adbaa94c05e3a1c7f21bd012a0b29ba8ddbccb2c93b0d",
 )
 
 github_archive(
