@@ -1,6 +1,14 @@
 use std::error;
 use std::fmt;
 
+pub mod validation;
+
+#[derive(Debug, Copy, Clone)]
+struct Point {
+    x: i32,
+    y: i32,
+}
+
 #[derive(Debug, PartialEq)]
 pub enum Direction {
     Over,
@@ -22,6 +30,15 @@ pub enum Orientation {
 
 #[derive(Debug)]
 pub struct BadOrientation(char);
+
+impl Point {
+    fn new(x: i32, y: i32) -> Self {
+        Self { x, y }
+    }
+    fn zero() -> Self {
+        Self { x: 0, y: 0 }
+    }
+}
 
 impl Direction {
     pub fn from_str(repr: &str) -> Result<Vec<Self>, BadDirection> {
