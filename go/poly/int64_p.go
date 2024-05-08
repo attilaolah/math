@@ -61,7 +61,7 @@ func (p Int64P) Compact() Int64P {
 			ret = append(ret, t)
 			continue
 		}
-		if ret[size-1].Ind.Eq(t.Ind) {
+		if ret[size-1].Eq(t.Ind) {
 			ret[size-1].C += t.C
 			continue
 		}
